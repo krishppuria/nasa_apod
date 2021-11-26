@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APOD</title>
+</head>
+<body>
+    <h1 style="text-align: center;"><%= title%></h1>
+    <% if(media_type=="image") {%>
+        <img style="display: block; margin: auto;" src="<%= media_url%>" alt="">
+    <% }else{ %>
+        <iframe width="300" height="250" src="<%= media_url%>"></iframe>
+    <% } %>
+    
+    <p>Explanation: <%= desc%></p>
+</body>
+</html>
