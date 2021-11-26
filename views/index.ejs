@@ -8,12 +8,28 @@
 </head>
 <body>
     <h1 style="text-align: center;"><%= title%></h1>
+    <input style="float: right;" type="date" id="myDate" onchange="changeDate(value)">
     <% if(media_type=="image") {%>
-        <img style="display: block; margin: auto;" src="<%= media_url%>" alt="">
+        <img style="display: block;" src="<%= media_url%>" alt="">
     <% }else{ %>
-        <iframe width="300" height="250" src="<%= media_url%>"></iframe>
+        <iframe width="500" height="420" src="<%= media_url%>"></iframe>
     <% } %>
     
     <p>Explanation: <%= desc%></p>
+    <script>
+        window.onload=function(){
+            getDate();
+        }
+        function getDate(){
+            var url=new URLSearchParams(window.location.search)
+            var today = new Date();
+            var old=url.get('date')
+            var sec = old || today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+            document.getElementById("myDate").value = sec
+        }
+        function changeDate(dt){
+            window.location.href="/apod?date="+dt;
+        }
+    </script>
 </body>
 </html>

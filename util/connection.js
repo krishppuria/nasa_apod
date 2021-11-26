@@ -1,7 +1,6 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
-// mongoose.set()
 const url="mongodb://localhost:27017/NasaPlanetory_DB";
 
 const apodSchema = Schema({
