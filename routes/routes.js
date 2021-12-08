@@ -7,7 +7,6 @@ getApodData = async(req,res,next)=>{
         //check if date exists in req else get today's date in 'YYYY-MM-DD' format
         const date=req.query["date"] || new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + new Date().getDate()).slice(-2);
         const apodData = await planetryService.checkApod(date)
-        console.log("data",apodData);
         res.status = 200;
         res.render('index', apodData);
     } catch (err) {

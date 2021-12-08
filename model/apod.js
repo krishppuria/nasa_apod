@@ -13,7 +13,6 @@ planetoryDb.getData = async(date)=>{
 planetoryDb.setData = async(insData)=>{
     const db = await dbModel.getPlanetoryCollection();
     const insertedData = await db.create(insData);
-    console.log("ins",insertedData)
     return insertedData;
 }
 

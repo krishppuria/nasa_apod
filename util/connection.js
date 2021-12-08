@@ -25,7 +25,6 @@ collection.getPlanetoryCollection = async () => {
     try {
         return (await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })).model('Apod', apodSchema)
     } catch (err) {
-        console.log((err));
         let error = new Error("Could not connect to database")
         error.status = 500
         throw error
