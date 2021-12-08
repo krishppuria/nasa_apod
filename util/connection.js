@@ -1,15 +1,18 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
-const url="mongodb://localhost:27017/NasaPlanetory_DB";
+const config = require("./config")
+const { db: { host, port, name } } = config;
+const url = `mongodb://${host}:${port}/${name}`;
 
+//Apod schema 
 const apodSchema = Schema({
-    date: {type:String, unique: true},
+    date: { type: String, unique: true },
     title: String,
     copyright: String,
     desc: String,
-    media_type:{ type: String, enum: ['image','video']},
-    media_url:String,
+    media_type: { type: String, enum: ['image', 'video'] },
+    media_url: String,
 }, { collection: "Apod" });
 
 
@@ -17,7 +20,8 @@ const apodSchema = Schema({
 
 let collection = {};
 
-collection.getPlanetoryCollection = async() => {
+//Mongodb conection establishment
+collection.getPlanetoryCollection = async () => {
     try {
         return (await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })).model('Apod', apodSchema)
     } catch (err) {

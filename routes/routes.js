@@ -4,17 +4,19 @@ const planetryService = require("../service/planetry")
 
 getApodData = async(req,res,next)=>{
     try {
-        let date=req.query["date"] || new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
-        let data = await planetryService.checkApod(date)
+        //check if date exists in req else get today's date in 'YYYY-MM-DD' format
+        const date=req.query["date"] || new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + new Date().getDate()).slice(-2);
+        const apodData = await planetryService.checkApod(date)
+        console.log("data",apodData);
         res.status = 200;
-        res.render('index', data);
+        res.render('index', apodData);
     } catch (err) {
         next(err)
     }
 }
-router.get('/', getApodData)
+router.get('/', getApodData) //route without date and return's today's Apod
 
-router.get('/apod', getApodData)
+router.get('/apod', getApodData)// route to get previous day's Apod.
 
 
 module.exports = router;
